@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 3 Years Anniversary 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background: linear-gradient(135deg, #fae8f0 0%, #f5d4e1 50%, #f0bfce 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Envelope Opening Animation */
+        .envelope-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fae8f0 0%, #f5d4e1 50%, #f0bfce 100%);
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .envelope-wrapper.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .envelope-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border: 2px solid #d4a5b3;
+            border-radius: 4px;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 120px solid #f8e8ee;
+            top: 0;
+            left: 0;
+            transform-origin: top center;
+            transition: transform 0.6s ease;
+            z-index: 3;
+            border-top-color: #c2608c;
+        }
+
+        .envelope-flap::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #d4a5b3;
+            border-radius: 50%;
+            top: -80px;
+            left: -20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .envelope-flap::after {
+            content: '♥';
+            position: absolute;
+            top: -75px;
+            left: -8px;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .envelope-container.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-letter {
+            position: absolute;
+            width: 260px;
+            height: 320px;
+            background: #fff;
+            top: -40px;
+            left: 20px;
+            border: 1px solid #d4a5b3;
+            border-radius: 4px;
+            transition: transform 0.6s ease 0.3s;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #c2608c;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .envelope-container.open .envelope-letter {
+            transform: translateY(-100px);
+        }
+
+        .click-instruction {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #c2608c;
+            font-size: 16px;
+            animation: pulse 2s infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease 0.5s, visibility 0s 0.5s;
+        }
+
+        .main-content.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Elegant floating particles */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: elegantFloat 15s infinite;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes elegantFloat {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0;
+            margin: 0 0 40px 0;
+            box-shadow: 0 8px 32px rgba(219, 112, 147, 0.15);
+            border-bottom: 3px solid #d4a5b3;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            color: #c2608c;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .header .names {
+            font-size: 2em;
+            color: #8b5a6f;
+            margin: 30px 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+            line-height: 1.8;
+        }
+
+        .header .names .ampersand {
+            font-size: 1.2em;
+            color: #d4a5b3;
+            font-style: italic;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .header .anniversary-date {
+            font-size: 1.1em;
+            color: #a07889;
+            margin: 25px 0 0 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(219, 112, 147, 0.1);
+            border-top: 2px solid #d4a5b3;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(219, 112, 147, 0.2);
+        }
+
+        .stat-card .number {
+            font-size: 3.5em;
+            color: #c2608c;
+            font-weight: 300;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        .stat-card .label {
+            font-size: 1em;
+            color: #8b5a6f;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Love Letter Section - Paper Style */
+        .love-letter {
+            background: linear-gradient(to bottom, #fffef9 0%, #faf8f0 100%);
+            border-radius: 2px;
+            padding: 80px 70px;
+            margin: 50px auto;
+            max-width: 850px;
+            box-shadow: 
+                0 1px 3px rgba(0,0,0,0.12),
+                0 10px 25px rgba(0,0,0,0.08),
+                inset 0 0 100px rgba(212, 165, 179, 0.05);
+            position: relative;
+            animation: fadeInUp 1.5s ease;
+            border: 1px solid #e8dfd0;
+            /* Paper texture effect */
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 31px,
+                    rgba(212, 165, 179, 0.1) 31px,
+                    rgba(212, 165, 179, 0.1) 32px
+                );
+        }
+
+        /* Paper torn edges effect */
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                transparent 2%, 
+                #fffef9 2%, 
+                #fffef9 98%, 
+                transparent 98%);
+            filter: drop-shadow(0 -1px 2px rgba(0,0,0,0.1));
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .love-letter h2 {
+            text-align: center;
+            color: #c2608c;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding-bottom: 20px;
+        }
+
+        .letter-content {
+            color: #4a3f47;
+            font-size: 1.15em;
+            line-height: 2.2;
+            text-align: justify;
+            padding: 0;
+            font-weight: 300;
+        }
+
+        .letter-content p {
+            margin-bottom: 25px;
+            text-indent: 40px;
+        }
+
+        .letter-content p:first-of-type {
+            text-indent: 0;
+            font-style: italic;
+            color: #6d4c5a;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 50px;
+            color: #8b5a6f;
+            font-size: 1.25em;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 50px 30px;
+            color: #a07889;
+            font-size: 1.2em;
+            margin: 50px 0 30px 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .footer .main-text {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .footer .sub-text {
+            font-size: 0.9em;
+            font-style: italic;
+            color: #b89aa6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .envelope {
+                width: 250px;
+                height: 166px;
+            }
+            
+            .envelope-flap {
+                border-left: 125px solid transparent;
+                border-right: 125px solid transparent;
+                border-top: 100px solid #c2608c;
+            }
+            
+            .envelope-letter {
+                width: 220px;
+                height: 280px;
+                left: 15px;
+                font-size: 16px;
+            }
+            
+            .header {
+                padding: 50px 30px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .header .names {
+                font-size: 1.5em;
+            }
+            .love-letter {
+                padding: 40px 30px;
+            }
+            .stat-card .number {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Envelope Opening Animation -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-container" id="envelopeContainer">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-letter">
+                    <div>
+                        <div style="font-size: 24px; margin-bottom: 15px;">💕</div>
+                        <div style="font-weight: 500;">Untuk Cinta Hatiku</div>
+                        <div style="font-size: 14px; margin-top: 10px; color: #a07889;">Zidhan & Viola</div>
+                    </div>
+                </div>
+                <div class="envelope-flap"></div>
+            </div>
+            <div class="click-instruction">Klik untuk membuka 💌</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Elegant floating elements -->
+        <div class="heart" style="left: 15%; animation-delay: 0s;">♥</div>
+        <div class="heart" style="left: 35%; animation-delay: 3s;">♥</div>
+        <div class="heart" style="left: 55%; animation-delay: 6s;">♥</div>
+        <div class="heart" style="left: 75%; animation-delay: 9s;">♥</div>
+        <div class="heart" style="left: 85%; animation-delay: 12s;">♥</div>
+
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>Happy 3rd Anniversary</h1>
+                <div class="names">
+                    ZIDHAN TENGKU WILANDRA
+                    <span class="ampersand">&</span>
+                    VIOLA APRILIA
+                </div>
+                <div class="anniversary-date">
+                    3 Years of Love & Happiness
+                </div>
+                <p style="font-size: 0.95em; color: #b89aa6; margin-top: 25px; font-weight: 300; letter-spacing: 1px;">
+                    12 Februari 2023 — Today
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number">3</div>
+                    <div class="label">Years Together</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">36</div>
+                    <div class="label">Months</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">1095+</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">∞</div>
+                    <div class="label">Memories</div>
+                </div>
+            </div>
+
+            <!-- Love Letter -->
+            <div class="love-letter">
+                <h2>A Letter of Love</h2>
+                <div class="letter-content">
+                    <p>My Dearest,</p>
+                    
+                    <p>
+                        Hai sayang, lumayan berasa udah 3 tahun kita punya hubungan, mulai dari kita jadian yang gak aku duga, 
+                        sampai kita udah LDR hampir satu tahunan ya...
+                    
+                    </p>
+                    
+                    <p>
+                        Aku mau ngucapin rasa maaf dan minta maaf aku sama kamu, terima kasih bangettt udah tahan sama sifat dan kelakuan aku
+                        yang sering bikin kamu sedih, maaf aku belum bisa menjadi seperti cowo yang kamu idam-idam kan, maaf aku sering buat hati kamu sedih,
+                        maaf aku belum bisa menjadi cowo yang baik buat kamu, dan maaf aku belum bisa ngasih kamu banyak kebahagiaan.
+
+                    </p>
+                    
+                    <p>
+                        Hummm, mungkin itu aja sayang, maaf anniversary 2 tahun terakhir mungkin tidak terlalu berkesan buat kamu, aku ingin kita baik-baik saja seperti dulu
+                        yang kamu sering ketawa2, sering senyum, bahkan aku bisa tenang cuman denger suara kamu kalo aku lagi ada masalah.
+                    </p>
+                    
+                    <div class="signature">
+                        With all my love,<br>
+                        Mas Ateng
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="main-text">Three Years Down, Forever to Go</div>
+                <div class="sub-text">A journey of love, laughter, and endless memories</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Envelope opening animation
+        const envelopeContainer = document.getElementById('envelopeContainer');
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+        const mainContent = document.getElementById('mainContent');
+        
+        let isOpened = false;
+        
+        envelopeContainer.addEventListener('click', function() {
+            if (!isOpened) {
+                isOpened = true;
+                this.classList.add('open');
+                
+                // Hide envelope and show main content after animation
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('hide');
+                    mainContent.classList.add('show');
+                }, 1500);
+            }
+        });
+
+        // Add subtle floating hearts after envelope is opened
+        setTimeout(() => {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '♥';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 8 + 12) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 20000);
+            }, 5000);
+        }, 2000);
+    </script>
+</body>
+</html>
